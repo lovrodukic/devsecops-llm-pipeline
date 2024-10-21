@@ -4,17 +4,19 @@ provider "aws" {
 }
 
 # Attempt to fetch details of an existing bucket
-data "aws_s3_bucket" "devsecops-llm-pipeline" {
-  bucket = var.bucket_name
-}
-
-# Create a bucket only if it does not exist
 resource "aws_s3_bucket" "devsecops-llm-pipeline" {
-  count  = length(data.aws_s3_bucket.devsecops-llm-pipeline.*.id) > 0 ? 0 : 1
   bucket = var.bucket_name
 
   tags = {
     Name        = "DevSecOps LLM Pipeline Bucket"
     Environment = "Development"
+  }
+
+  lifecycle {
+    ignore_changes = [
+      # List of attributes to ignore changes to (all, in this case)
+      all,
+    ]
+    prevent_destroy = true
   }
 }
