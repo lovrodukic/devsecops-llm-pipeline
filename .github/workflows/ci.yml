@@ -45,5 +45,3 @@ jobs:
         if: success()
         run: terraform apply -auto-approve
         working-directory: ./terraform/
-        env:
-          TF_LOG: DEBUG
