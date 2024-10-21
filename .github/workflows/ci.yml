@@ -35,8 +35,7 @@ jobs:
         run: bash ./scripts/check-bucket.sh ${{ env.BUCKET_NAME }}
 
       - name: Import S3 Bucket to Terraform State
-        if: env.BUCKET_EXISTS == 'true'
-        run: terraform import aws_s3_bucket.devsecops-llm-pipeline ${{ env.BUCKET_NAME }}
+        run: bash ./scripts/import-bucket.sh ${{ env.BUCKET_NAME }} ${{ env.BUCKET_EXISTS }}
         working-directory: ./terraform/
 
       - name: Terraform Plan
