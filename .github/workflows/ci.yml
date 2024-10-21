@@ -31,6 +31,7 @@ jobs:
           else
             echo "Bucket does not exist."
             echo "BUCKET_EXISTS=false" >> $GITHUB_ENV
+          fi
 
       - name: Import S3 Bucket to Terraform State
         if: env.BUCKET_EXISTS == 'false'
