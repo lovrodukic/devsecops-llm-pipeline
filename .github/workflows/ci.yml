@@ -32,15 +32,7 @@ jobs:
         working-directory: ./terraform/
 
       - name: Check if S3 Bucket Exists
-        id: check-bucket
-        run: |
-          if aws s3api head-bucket --bucket ${{ env.BUCKET_NAME }} 2>/dev/null; then
-            echo "Bucket exists."
-            echo "BUCKET_EXISTS=true" >> $GITHUB_ENV
-          else
-            echo "Bucket does not exist."
-            echo "BUCKET_EXISTS=false" >> $GITHUB_ENV
-          fi
+        run: bash ./scripts/check-bucket.sh ${{ env.BUCKET_NAME }}
 
       - name: Import S3 Bucket to Terraform State
         if: env.BUCKET_EXISTS == 'true'
