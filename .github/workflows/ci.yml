@@ -43,7 +43,7 @@ jobs:
           fi
 
       - name: Import S3 Bucket to Terraform State
-        if: env.BUCKET_EXISTS == 'false'
+        if: env.BUCKET_EXISTS == 'true'
         run: terraform import aws_s3_bucket.devsecops-llm-pipeline ${{ env.BUCKET_NAME }}
         working-directory: ./terraform/
 
