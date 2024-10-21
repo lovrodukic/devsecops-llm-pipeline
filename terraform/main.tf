@@ -13,10 +13,6 @@ resource "aws_s3_bucket" "devsecops-llm-pipeline" {
   }
 
   lifecycle {
-    ignore_changes = [
-      # List of attributes to ignore changes to (all, in this case)
-      all,
-    ]
     prevent_destroy = true
   }
 }
