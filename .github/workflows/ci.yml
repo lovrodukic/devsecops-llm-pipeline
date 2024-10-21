@@ -37,6 +37,10 @@ jobs:
         run: terraform plan
         working-directory: ./terraform/
 
+      - name: Import S3 Bucket
+        run: terraform import aws_s3_bucket.devsecops-llm-pipeline devsecops-llm-pipeline
+        working-directory: ./terraform/
+
       - name: Terraform Apply
         if: success()
         run: terraform apply -auto-approve
