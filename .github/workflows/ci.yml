@@ -31,11 +31,8 @@ jobs:
         run: terraform init
         working-directory: ./terraform/
 
-      - name: Check if S3 Bucket Exists
-        run: bash ./scripts/check-bucket.sh ${{ env.BUCKET_NAME }}
-
-      - name: Import S3 Bucket to Terraform State
-        run: bash ../scripts/import-bucket.sh ${{ env.BUCKET_NAME }} ${{ env.BUCKET_EXISTS }}
+      - name: Check and Import S3 Bucket
+        run: bash ../scripts/manage-bucket.sh ${{ env.BUCKET_NAME }}
         working-directory: ./terraform/
 
       - name: Terraform Plan
