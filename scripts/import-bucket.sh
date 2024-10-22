@@ -6,6 +6,7 @@ if [ -z "$1" ]; then
 fi
 
 # Check if the bucket exists, skip import if it doesn't
+# TODO: Merge import-bucket.sh and check-bucket.sh
 BUCKET_EXISTS=$2
 
 if [ "$BUCKET_EXISTS" == "true" ]; then
