@@ -13,6 +13,7 @@ OPENAI_URL = 'https://api.openai.com/v1/chat/completions'
 
 # Send a prompt to LLM
 def call_llm(prompt):
+    print(f"Prompt: {prompt}")
     headers = {
         'Authorization': f'Bearer {OPENAI_API_KEY}',
         'Content-Type': 'application/json'
@@ -27,10 +28,11 @@ def call_llm(prompt):
 
     response = requests.post(OPENAI_URL, json=data, headers=headers)
     if response.status_code == 200:
-        return response.json()
+        return response.json()['choices'][0]['message']['content']
     else:
-        print("Failed Request Response:", response.text) 
-        return f"Error: {response.status_code}, Message: {response.text}"
+        error_message = response.json()['error']['message']
+        print(f"Failed Request Response: {error_message}") 
+        return f"Error: {response.status_code}, Message: {error_message}"
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
