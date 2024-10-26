@@ -1,9 +1,12 @@
-name: DevSecOps Pipeline
+# Trigger only when files in the terraform directory (IaC) are updated
+name: Terraform Pipeline
 
 on:
   push:
     branches:
       - main
+    paths:
+      - 'terraform/**'
 
 jobs:
   terraform:

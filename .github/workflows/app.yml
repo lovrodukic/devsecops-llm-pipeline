@@ -1,0 +1,13 @@
+# Trigger only when files in the app directory are updated
+name: App Deployment Pipeline
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'app/**'
+  
+jobs:
+  deploy-app:
+    runs-on: ubuntu-latest

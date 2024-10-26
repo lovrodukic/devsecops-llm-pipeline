@@ -7,15 +7,15 @@
   
   <body>
     <h1>Chatbot</h1>
-      <form method="POST">
-        <label for="user_input">Enter your text:</label>
-        <input id="user_input" name="user_input"></input>
-        <input type="submit" value="Submit">
-      </form>
+    <form method="POST">
+      <label for="user_input">Enter your text:</label>
+      <input id="user_input" name="user_input"></input>
+      <input type="submit" value="Submit">
+    </form>
 
-      {% if response %}
-        <h2>Response:</h2>
-        <p>{{ response }}</p>
-      {% endif %}
+    {% if response %}
+      <h2>Response:</h2>
+      <p>{{ response }}</p>
+    {% endif %}
   </body>
 </html>
