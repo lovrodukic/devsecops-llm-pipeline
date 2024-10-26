@@ -11,3 +11,22 @@ on:
 jobs:
   deploy-app:
     runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Install Dependencies
+        run: |
+          python -m venv venv
+          source venv/bin/activate
+          pip install -r app.requirements.txt
+        
+      - name: Deploy to Environment
+        run: |
+          echo "Deploying app..."

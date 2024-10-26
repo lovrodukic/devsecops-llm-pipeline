@@ -3,7 +3,7 @@ provider "aws" {
   region = var.region
 }
 
-# Attempt to fetch details of an existing bucket
+# Creation of S3 bucket
 resource "aws_s3_bucket" "devsecops-llm-pipeline" {
   bucket = var.bucket_name
 
@@ -14,5 +14,37 @@ resource "aws_s3_bucket" "devsecops-llm-pipeline" {
 
   lifecycle {
     prevent_destroy = true
+  }
+}
+
+# Security group to allow HTTP access
+resource "aws_security_group" "app_sg" {
+  name        = var.sg_name
+  description = "Allow HTTP inbound traffic"
+
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+
+# Create EC2 instance to host application
+resource "aws_instance" "app_instance" {
+  ami             = var.ami_id
+  instance_type   = var.instance_type
+  security_groups = [aws_security_group.app_sg.name]
+  key_name        = var.key_name
+
+  tags = {
+    Name = "Flask App Instance"
   }
 }
