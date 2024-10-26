@@ -44,11 +44,8 @@ jobs:
         run: bash ../scripts/manage-bucket.sh ${{ env.BUCKET_NAME }}
         working-directory: ./terraform/
 
-      - name: Terraform Plan
-        run: terraform plan
-        working-directory: ./terraform/
-
-      - name: Terraform Apply
-        if: success()
-        run: terraform apply -auto-approve
+      - name: Run Terraform Plan and Apply
+        run: |
+          chmod +x ../scripts/terraform_run.sh
+          ../scripts/terraform_run.sh apply
         working-directory: ./terraform/
