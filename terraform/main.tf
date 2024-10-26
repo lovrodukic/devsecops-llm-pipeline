@@ -4,7 +4,7 @@ provider "aws" {
 }
 
 # Creation of S3 bucket
-resource "aws_s3_bucket" "app_bucket" {
+resource "aws_s3_bucket" "devsecops-llm-pipeline" {
   bucket = var.bucket_name
 
   tags = {
