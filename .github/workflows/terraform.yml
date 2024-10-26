@@ -12,7 +12,12 @@ jobs:
   terraform:
     runs-on: ubuntu-latest
     env:
-      BUCKET_NAME: devsecops-llm-pipeline
+      AWS_REGION: ${{ secrets.AWS_REGION }}
+      AMI_ID: ${{ secrets.AMI_ID }}
+      BUCKET_NAME: ${{ secrets.BUCKET_NAME }}
+      INSTANCE_TYPE: ${{ secrets.INSTANCE_TYPE }}
+      SG_NAME: ${{ secrets.SG_NAME }}
+      KEY_NAME: ${{ secrets.KEY_NAME }}
 
     steps:
       - name: Checkout Code
@@ -23,7 +28,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-west-1
+          aws-region: ${{ env.AWS_REGION }}
 
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v1
