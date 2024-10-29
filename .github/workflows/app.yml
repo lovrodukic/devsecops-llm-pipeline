@@ -34,4 +34,4 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
           chmod +x ../scripts/deploy.sh
-          ../scripts/deploy.sh
+          ./scripts/deploy.sh
