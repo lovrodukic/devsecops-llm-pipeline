@@ -3,7 +3,7 @@
 # Connection details from environment variables
 EC2_USER=${EC2_USER}
 EC2_HOST=${EC2_HOST}
-SSH_KEY_PATH="$HOME/.ssh/temp-ec2-key.pem"
+SSH_KEY_PATH="temp-ec2-key.pem"
 REMOTE_APP_PATH="/home/ubuntu/app"
 
 # Create SSH private key file
