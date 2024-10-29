@@ -46,6 +46,6 @@ jobs:
 
       - name: Run Terraform Plan and Apply
         run: |
-          chmod +x ../scripts/terraform_run.sh
-          ../scripts/terraform_run.sh apply
+          chmod +x ../scripts/terraform-run.sh
+          ../scripts/terraform-run.sh apply
         working-directory: ./terraform/
