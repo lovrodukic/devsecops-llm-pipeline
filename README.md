@@ -7,10 +7,8 @@ The pipeline automates infrastructure deployment using Infrastructure as Code
 before deployment.
 
 ## To Do:
-- Deploy `app` and add CI/CD actions for deployment.
-- Separate `app` and `terraform` CI/CD actions. Only trigger each action upon
-  update to corresponding directory.
 - Incorporate LLM trigger for scanning security vulnerabilities and code review.
+- Test CI/CD pipeling with automated LLM code review / vulnerability check.
 
 ## Technologies
 - **Infrastructure**: AWS, Terraform
