@@ -19,14 +19,18 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.9'
+          python-version: '3.8.10'
 
       - name: Install Dependencies
         run: |
-          python -m venv venv
-          source venv/bin/activate
+          python -m pip install --upgrade pip
           pip install -r app/requirements.txt
         
-      - name: Deploy to Environment
+      - name: Deploy to Environment via SSH
+        env:
+          EC2_HOST: ${{ secrets.EC2_HOST }}
+          EC2_USER: ${{ secrets.EC2_USER }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
-          echo "Deploying app..."
+          chmod +x ../scripts/deploy.sh
+          ../scripts/deploy.sh

@@ -1,3 +1,4 @@
 Flask==2.0.2
 requests==2.26.0
-dotenv
+python-dotenv==1.0.1
+Werkzeug==2.0.3
