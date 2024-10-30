@@ -8,9 +8,11 @@ before deployment.
 
 ## To Do:
 - Incorporate LLM trigger for scanning security vulnerabilities and code review.
+- Store vulnerability report as an artifact
+- Test `scan.py` and OpenAI API for check
 - Test CI/CD pipeling with automated LLM code review / vulnerability check.
 
 ## Technologies
 - **Infrastructure**: AWS, Terraform
-- **Generative AI**: LLMs, including OpenAI models and WhiteRabbitNeo
-- **Languages**: Python
+- **Generative AI**: LLMs, OpenAI API
+- **Languages**: Python, HCL
