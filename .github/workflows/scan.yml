@@ -1,0 +1,38 @@
+# Trigger only when files in the app directory are updated
+name: Vulnerability Scan Pipeline
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'app/**'
+
+jobs:
+  scan-vulnerabilities:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+
+      - name: Run Vulnerability Scan
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          python ./scripts/scan.py
+        
+      - name: Upload Scan Report
+        uses: actions/upload-artifact@v2
+        with:
+          name: vulnerability-report
+          path: ./vulnerability_report.md
