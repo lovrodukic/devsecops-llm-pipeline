@@ -6,7 +6,7 @@ import os
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 OPENAI_URL = "https://api.openai.com/v1/chat/completions"
 
-prompt = (
+system_prompt = (
     "You are a security analyst. Analyze the provided code for security "
     "vulnerabilities and provide the results in Markdown format strictly "
     "using the following template:\n\n"
@@ -33,7 +33,7 @@ def llm_scan(file_content):
     data = {
         "model": "gpt-4o-mini",
         "messages": [
-            {"role": "system", "content": prompt},
+            {"role": "system", "content": system_prompt},
             {"role": "user", "content": file_content}
         ]
     }

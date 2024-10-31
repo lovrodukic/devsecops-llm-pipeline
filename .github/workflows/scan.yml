@@ -1,4 +1,4 @@
-# Trigger only when files in the app directory are updated
+# Trigger only when files in the app/ directory are updated
 name: Vulnerability Scan Pipeline
 
 on:

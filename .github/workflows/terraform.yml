@@ -1,4 +1,4 @@
-# Trigger only when files in the terraform directory (IaC) are updated
+# Trigger only when files in the terraform/ directory (IaC) are updated
 name: Terraform Pipeline
 
 on:
