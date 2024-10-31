@@ -36,4 +36,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: vulnerability-report
-          path: ./vulnerability_report.md
+          path: ./scripts/vulnerability_report.md
