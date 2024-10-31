@@ -32,7 +32,7 @@ jobs:
           python ./scripts/scan.py
         
       - name: Upload Scan Report
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: vulnerability-report
           path: ./vulnerability_report.md
