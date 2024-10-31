@@ -10,16 +10,15 @@ OPENAI_URL = "https://api.openai.com/v1/chat/completions"
 
 prompt = (
     "You are a security analyst. Analyze the provided code for security "
-    "vulnerabilities and provide the results in .md format strictly "
+    "vulnerabilities and provide the results in Markdown format strictly "
     "using the following template:\n\n"
     "For each vulnerability, include the following sections:\n\n"
     "- **Vulnerability Title**\n"
     "  - **Description**: Brief description of the vulnerability.\n"
     "  - **Impact**: Explain the potential impact.\n"
     "  - **Recommendation**: Suggested fix or mitigation.\n\n"
-    "Focus on high-priority issues and be concise. Do not exceed 80 "
-    "characters per line; if the description exceeds 80 characters, use a "
-    "new line.\n\n"
+    "Focus on high-priority issues and be concise. Limit lines to 80 "
+    "characters; if necessary, use multiple lines.\n\n"
     "**Example:**\n"
     "- **SQL Injection**:\n"
     "  - **Description**: Code is vulnerable to SQL injection in login().\n"
@@ -28,7 +27,7 @@ prompt = (
 )
 
 # Call LLM to scan for vulnerabilities in a file
-def llm_scan(content):
+def llm_scan(file_content):
     headers = {
         "Authorization": f"Bearer {OPENAI_API_KEY}",
         "Content-Type": "application/json"
@@ -37,7 +36,7 @@ def llm_scan(content):
         "model": "gpt-3.5-turbo",
         "messages": [
             {"role": "system", "content": prompt},
-            {"role": "user", "content": content}
+            {"role": "user", "content": file_content}
         ]
     }
 
@@ -59,20 +58,22 @@ def scan_file(file_path):
 # Create report for vulnerability scan and save it as .md
 def generate_report():
     report = ["# Vulnerability Report\n"]
+    report_path = "vulnerability_report.md"
 
     for root, _, files in os.walk("../app"):
         for file in files:
             if file in [".gitignore", ".env"]:
                 continue
+
             file_path = os.path.join(root, file)
             print(f"Scanning {file_path}...")
+            
             vulnerabilities = scan_file(file_path)
-
-            report.append(f"## {file_path}\n")
+            file_name = file_path.split("/")[-1]
+            report.append(f"## {file_name}\n")
             report.append(vulnerabilities)
             report.append("\n")
-    
-    report_path = "vulnerability_report.md"
+
     with open(report_path, "w") as file:
         file.write("\n".join(report))
     
