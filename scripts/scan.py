@@ -68,7 +68,7 @@ def generate_report():
     report = ["# Vulnerability Report\n"]
     report_path = "vulnerability_report.md"
 
-    for root, _, files in os.walk("../app"):
+    for root, _, files in os.walk("app"):
         for file in files:
             if file in [".gitignore", ".env"]:
                 continue
